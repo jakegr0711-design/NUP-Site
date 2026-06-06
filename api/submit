@@ -1,4 +1,4 @@
-api/submit.js// NUP Recruiting Intake — submission endpoint
+// NUP Recruiting Intake â submission endpoint
 // Deploy as a serverless function (e.g. Vercel: place at /api/submit.js).
 // The Airtable token lives ONLY here, in an environment variable. It is never
 // sent to the browser, so view-source on the form exposes nothing.
@@ -19,11 +19,14 @@ const ALLOWED_FIELDS = new Set([
   "Competition Level", "Team Role", "Honors", "Film Link", "Offers",
   "Coach Contact & Camps", "GPA", "SAT", "ACT", "Intended Major",
   "Out-of-Pocket Budget", "Need-Based Aid", "Money Priority", "Money vs Level Tradeoff",
-  "Max Distance", "Family At Games", "School Size", "Setting", "Environment Notes",
+  "Max Distance", "Home City", "Home State", "Family At Games", "School Size",
+  "Setting", "Environment Notes",
   "College Position", "Scholarship vs Walk-On", "Desired Role", "Scheme Preference",
   "Why Play", "Dealbreakers", "Dream School 1", "Dream School 2", "Dream School 3",
-  "Consent: Account Access", "Consent: Player Reviews Sends", "Consent: List Sign-Off",
-  "Consent: Scope Understood", "Parent/Guardian Name", "Consent Date",
+  "Consent: Parent/Guardian Authority", "Consent: Account Access",
+  "Consent: Player Reviews Sends", "Consent: List Sign-Off", "Consent: Scope Understood",
+  "Consent: Info Accurate", "Consent: Data Use & Withdrawal", "Consent: No Guarantee / Not Agent",
+  "Parent/Guardian Name", "Consent Date",
   "Parent Email", "Parent Phone", "NUP Notes"
 ]);
 
@@ -81,9 +84,13 @@ export default async function handler(req, res) {
     });
 
     if (!r.ok) {
-      // Log status only — never log the family's data.
+      // Log status only â never log the family's data.
       console.error("Airtable responded", r.status);
       return res.status(502).json({ error: "Could not save. Please try again." });
     }
     return res.status(200).json({ ok: true });
   } catch (e) {
+    console.error("Submission failed to reach Airtable");
+    return res.status(502).json({ error: "Could not save. Please try again." });
+  }
+}
