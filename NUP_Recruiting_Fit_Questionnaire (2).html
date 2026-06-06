@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Up Prospects - Recruiting Fit Questionnaire</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Saira+Condensed:wght@600;700;800&display=swap');
+:root{--ac:#7DF70C;--ink:#0A0A0A;--pan:#F4F4F1;--mut:#555555}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#dedede;line-height:1.5}
+.wrap{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 0 0 1px #0001}
+
+/* header */
+.hd{background:var(--ink);color:#fff;padding:26px 34px 22px}
+.hd-top{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.hd-top img{width:30px;height:30px;display:block}
+.hd-top .wm{font-family:'Saira Condensed',Arial,sans-serif;font-weight:800;letter-spacing:3.5px;font-size:14px;color:#fff;text-transform:uppercase}
+.hd-top .wm b{color:var(--ac)}
+.hd h1{font-family:'Anton',Arial,sans-serif;font-weight:400;font-size:46px;line-height:.96;letter-spacing:.5px;margin:0;text-transform:uppercase}
+.hd .sub{font-family:'Saira Condensed',Arial,sans-serif;font-weight:700;letter-spacing:2.5px;font-size:12px;color:var(--ac);margin-top:9px;text-transform:uppercase}
+.hd .lede{font-size:13.5px;color:#cfcfcf;margin-top:14px;max-width:62ch}
+
+/* intro note */
+.note{background:var(--pan);border-left:4px solid var(--ac);padding:16px 20px;margin:0;font-size:13px}
+.note b{font-family:'Saira Condensed',Arial,sans-serif;letter-spacing:1px;font-weight:800;text-transform:uppercase;font-size:12px}
+
+/* section */
+.sec{padding:8px 34px 22px}
+.bar{background:var(--ink);color:var(--ac);font-family:'Saira Condensed',Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:2px;padding:8px 14px;margin:26px 0 4px;display:flex;align-items:center;text-transform:uppercase}
+.bar .n{font-family:'Anton',Arial,sans-serif;font-size:18px;margin-right:12px;line-height:1}
+.bar .who{margin-left:auto;font-size:9px;letter-spacing:1.5px;color:#fff;background:#ffffff22;padding:3px 8px;font-weight:700}
+.bar .who.player{background:var(--ac);color:var(--ink)}
+.seclede{font-size:12.5px;color:var(--mut);margin:10px 2px 14px;max-width:70ch}
+
+/* fields */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 18px}
+.f{display:flex;flex-direction:column;margin-bottom:14px}
+label.l{font-family:'Saira Condensed',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase;margin-bottom:5px}
+input[type=text],input[type=number],input[type=email],input[type=date],input[type=tel],select,textarea{
+  font-family:Arial,sans-serif;font-size:14px;color:var(--ink);border:1.5px solid var(--ink);background:#fff;padding:9px 11px;width:100%;border-radius:0;-webkit-appearance:none;appearance:none}
+select{background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%230A0A0A' stroke-width='1.6'/></svg>") no-repeat right 11px center}
+textarea{resize:vertical;min-height:70px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:inset 0 0 0 1.5px var(--ac)}
+.hint{font-size:11px;color:#888;margin-top:4px;font-style:italic}
+
+/* measurable row with verification toggle */
+.meas{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:end;margin-bottom:13px}
+.vflag{display:flex;border:1.5px solid var(--ink)}
+.vflag label{flex:1;font-family:'Saira Condensed',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;padding:8px 4px;cursor:pointer;color:var(--mut);background:#fff;user-select:none}
+.vflag input{display:none}
+.vflag label:first-of-type{border-right:1.5px solid var(--ink)}
+.vflag input:checked + label{background:var(--ink);color:var(--ac)}
+.vflag.v-good input:checked + label{background:var(--ac);color:var(--ink)}
+
+/* radios + checks */
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:block;border:1.5px solid var(--ink);padding:8px 13px;font-family:'Saira Condensed',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;background:#fff}
+.opt input:checked + label{background:var(--ink);color:var(--ac)}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px}
+.chk{display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer}
+.chk input{width:15px;height:15px;border:1.5px solid var(--ink);accent-color:#0A0A0A;flex-shrink:0}
+
+/* dream bucket callout */
+.dream{background:var(--ink);color:#fff;padding:18px 20px;margin-top:4px}
+.dream .dh{font-family:'Saira Condensed',Arial,sans-serif;letter-spacing:2px;font-weight:800;font-size:12px;color:var(--ac);text-transform:uppercase;margin-bottom:4px}
+.dream p{font-size:12px;color:#bdbdbd;margin:0 0 12px}
+.dream label.l{color:#999}
+.dream input[type=text]{border-color:#fff;background:#1c1c1c;color:#fff}
+.dream input::placeholder{color:#777}
+
+/* consent */
+.consent{border:2px solid var(--ink);padding:18px 20px;margin-top:8px;background:var(--pan)}
+.consent .ch{font-family:'Saira Condensed',Arial,sans-serif;letter-spacing:1.5px;font-weight:800;text-transform:uppercase;font-size:13px;margin-bottom:10px}
+.consent .chk{align-items:flex-start;margin-bottom:11px;font-size:12.5px}
+.consent .chk input{margin-top:2px}
+.signrow{display:grid;grid-template-columns:1fr 180px;gap:18px;margin-top:6px}
+
+/* actions */
+.act{padding:24px 34px 40px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+button{font-family:'Saira Condensed',Arial,sans-serif;font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:14px;border:none;padding:14px 26px;cursor:pointer;border-radius:0}
+.btn-go{background:var(--ac);color:var(--ink)}
+.btn-go:hover{background:#6bd60a}
+.btn-pr{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.act .meta{font-size:11px;color:#888;margin-left:auto}
+
+/* output */
+#out{margin:0 34px 40px;display:none}
+#out.show{display:block}
+#out h3{font-family:'Saira Condensed',Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;margin:0 0 8px}
+#out textarea{min-height:280px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55}
+
+.foot{background:var(--ink);color:#777;font-family:'Saira Condensed',Arial,sans-serif;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;padding:13px 34px;display:flex;justify-content:space-between;font-weight:700}
+.foot b{color:var(--ac)}
+
+@media(max-width:680px){.grid2,.grid3,.checklist,.signrow{grid-template-columns:1fr}.meas{grid-template-columns:1fr}.hd h1{font-size:34px}}
+@media print{body{background:#fff}.wrap{box-shadow:none}.act,#out{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hd">
+    <div class="hd-top">
+      <img src="data:image/jpeg;base64,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" alt="NUP">
+      <span class="wm">NEXT UP <b>PROSPECTS</b></span>
+    </div>
+    <h1>Recruiting Fit<br>Questionnaire</h1>
+    <div class="sub">Find the right schools before we send a single email</div>
+    <p class="lede">This is how we build your target list. Answer honestly, not optimistically. The measurables and grades you give us decide which levels we put in front of you. Inflated numbers get a kid emailing programs that were never going to call back.</p>
+  </header>
+
+  <div class="note">
+    <b>How this works.</b> &nbsp;Two things drive your list: what you <em>want</em> and what's <em>true</em>. We keep them separate on purpose. Dream schools go in their own box at the end. Everything else is the honest profile we build your reach / target / likely list from. <b>You sign off on the final school list before we email anyone.</b>
+  </div>
+
+  <div class="sec">
+
+    <!-- 1 ELIGIBILITY -->
+    <div class="bar"><span class="n">1</span>Eligibility Check<span class="who">Parent</span></div>
+    <div class="seclede">Quick factual gate. Confirms the player is recruitable on paper before we build anything.</div>
+    <div class="grid3">
+      <div class="f"><label class="l">Player full name</label><input type="text" data-k="Player name"></div>
+      <div class="f"><label class="l">Graduation / class year</label>
+        <select data-k="Class year"><option value="">Select</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select>
+        <span class="hint">Drives your whole timeline and how aggressive we go.</span></div>
+      <div class="f"><label class="l">Primary position</label><input type="text" data-k="Primary position" placeholder="e.g. QB"></div>
+    </div>
+    <div class="grid3">
+      <div class="f"><label class="l">Secondary position (if any)</label><input type="text" data-k="Secondary position"></div>
+      <div class="f"><label class="l">NCAA Eligibility Center</label>
+        <select data-k="Eligibility Center status"><option value="">Select</option><option>Registered</option><option>Started, not finished</option><option>Not yet started</option><option>Not sure</option></select></div>
+      <div class="f"><label class="l">Transcript on file with NCAA?</label>
+        <select data-k="Transcript on file"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+    </div>
+
+    <!-- 2 ATHLETIC -->
+    <div class="bar"><span class="n">2</span>Athletic Profile<span class="who player">Player</span></div>
+    <div class="seclede">This is the section everything else is built on. Every measurable has a flag: was it <b>verified at a camp/combine</b>, or <b>self-reported</b>? Self-reported 40 times run about two tenths fast on average, so we band you differently depending on which it is. Be straight here.</div>
+
+    <div class="grid2">
+      <div class="f"><label class="l">Height (measured)</label><input type="text" data-k="Height" placeholder="e.g. 6'1"></div>
+      <div class="f"><label class="l">Weight (lbs)</label><input type="number" data-k="Weight"></div>
+    </div>
+    <div class="f"><label class="l">Date height/weight last measured</label><input type="date" data-k="Measured date" style="max-width:240px"></div>
+
+    <div style="margin:18px 0 6px;font-family:'Saira Condensed',Arial,sans-serif;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:12px;color:var(--mut)">Testing numbers</div>
+    <div class="meas"><div class="f" style="margin:0"><label class="l">40-yard dash (sec)</label><input type="text" data-k="40 time"></div>
+      <div class="vflag v-good"><input type="radio" name="v40" id="v40a" data-vk="40 verification" value="Verified"><label for="v40a">Verified</label><input type="radio" name="v40" id="v40b" value="Self-reported"><label for="v40b">Self-rep</label></div></div>
+    <div class="meas"><div class="f" style="margin:0"><label class="l">Shuttle / pro agility (sec)</label><input type="text" data-k="Shuttle"></div>
+      <div class="vflag v-good"><input type="radio" name="vsh" id="vsha" data-vk="Shuttle verification" value="Verified"><label for="vsha">Verified</label><input type="radio" name="vsh" id="vshb" value="Self-reported"><label for="vshb">Self-rep</label></div></div>
+    <div class="meas"><div class="f" style="margin:0"><label class="l">Vertical jump (in)</label><input type="text" data-k="Vertical"></div>
+      <div class="vflag v-good"><input type="radio" name="vvj" id="vvja" data-vk="Vertical verification" value="Verified"><label for="vvja">Verified</label><input type="radio" name="vvj" id="vvjb" value="Self-reported"><label for="vvjb">Self-rep</label></div></div>
+    <div class="meas"><div class="f" style="margin:0"><label class="l">Key lift (squat/bench/clean - note which)</label><input type="text" data-k="Key lift" placeholder="e.g. Squat 405"></div>
+      <div class="vflag v-good"><input type="radio" name="vlf" id="vlfa" data-vk="Lift verification" value="Verified"><label for="vlfa">Verified</label><input type="radio" name="vlf" id="vlfb" value="Self-reported"><label for="vlfb">Self-rep</label></div></div>
+
+    <div class="grid2" style="margin-top:8px">
+      <div class="f"><label class="l">Level of competition</label><input type="text" data-k="Competition level" placeholder="State / classification / conference"></div>
+      <div class="f"><label class="l">Role on your team</label>
+        <select data-k="Role"><option value="">Select</option><option>Full-time starter</option><option>Part-time starter</option><option>Rotational</option><option>Backup</option></select></div>
+    </div>
+    <div class="f"><label class="l">Honors (all-conference / all-state / all-region, etc.)</label><input type="text" data-k="Honors"></div>
+    <div class="f"><label class="l">Hudl / film link</label><input type="text" data-k="Film link" placeholder="https://"></div>
+
+    <div style="margin:14px 0 6px;font-family:'Saira Condensed',Arial,sans-serif;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:12px;color:var(--mut)">Current recruiting interest</div>
+    <div class="f"><label class="l">Real offers in hand (school + type, or "none yet")</label><input type="text" data-k="Offers" placeholder="An offer is an offer. Camp invites and DMs are not offers."></div>
+    <div class="f"><label class="l">Coaches who've made contact / camps attended</label><textarea data-k="Contact and camps"></textarea></div>
+
+    <!-- 3 ACADEMICS -->
+    <div class="bar"><span class="n">3</span>Academics<span class="who">Parent</span></div>
+    <div class="seclede">Grades are a hard filter for academic D3s, the academies, and selective privates. A strong GPA also opens academic money that can beat a partial athletic offer at a higher level.</div>
+    <div class="grid3">
+      <div class="f"><label class="l">Core / weighted GPA</label><input type="text" data-k="GPA"></div>
+      <div class="f"><label class="l">SAT (if taken)</label><input type="text" data-k="SAT"></div>
+      <div class="f"><label class="l">ACT (if taken)</label><input type="text" data-k="ACT"></div>
+    </div>
+    <div class="f"><label class="l">Intended major(s) or field of study</label><input type="text" data-k="Intended major" placeholder="Rules out schools that don't offer it"></div>
+
+    <!-- 4 FINANCIAL -->
+    <div class="bar"><span class="n">4</span>Financial Reality<span class="who">Parent</span></div>
+    <div class="seclede">The section families skip and shouldn't. Most bad-fit departures are money, not football. If we're picking schools, cost has to be in the math.</div>
+    <div class="grid2">
+      <div class="f"><label class="l">Realistic out-of-pocket per year</label>
+        <select data-k="Out-of-pocket budget"><option value="">Select</option><option>Under $5k</option><option>$5k-$15k</option><option>$15k-$30k</option><option>$30k+</option><option>Prefer not to limit yet</option></select></div>
+      <div class="f"><label class="l">Pell-eligible / need-based aid?</label>
+        <select data-k="Need-based aid"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+    </div>
+    <div class="f"><label class="l">What kind of money matters most?</label>
+      <div class="opts" data-k="Money priority" data-multi="1">
+        <span class="opt"><input type="checkbox" id="m1" value="Athletic"><label for="m1">Athletic</label></span>
+        <span class="opt"><input type="checkbox" id="m2" value="Academic"><label for="m2">Academic</label></span>
+        <span class="opt"><input type="checkbox" id="m3" value="Need-based"><label for="m3">Need-based</label></span>
+        <span class="opt"><input type="checkbox" id="m4" value="Any path that works"><label for="m4">Any path</label></span>
+      </div></div>
+    <div class="f"><label class="l">Full academic ride at a lower level vs. partial athletic at a higher level - which wins?</label>
+      <div class="opts" data-k="Money vs level tradeoff">
+        <span class="opt"><input type="radio" name="trade" id="t1" value="Take the academic ride, lower level"><label for="t1">Academic ride, lower level</label></span>
+        <span class="opt"><input type="radio" name="trade" id="t2" value="Chase the higher level"><label for="t2">Higher level</label></span>
+        <span class="opt"><input type="radio" name="trade" id="t3" value="Depends / talk it through"><label for="t3">Depends</label></span>
+      </div></div>
+
+    <!-- 5 FIT PREFERENCES -->
+    <div class="bar"><span class="n">5</span>Fit Preferences<span class="who player">Player + Family</span></div>
+    <div class="seclede">These don't filter hard. They weight the ranking once the realistic levels are set.</div>
+    <div class="grid2">
+      <div class="f"><label class="l">Home city / town</label><input type="text" data-k="Home city" placeholder="Where the player lives"></div>
+      <div class="f"><label class="l">Home state</label>
+        <select data-k="Home state"><option value="">Select</option><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select>
+        <span class="hint">Anchors the distance filter below - the in-region school list can't be built without it.</span></div>
+    </div>
+    <div class="grid2">
+      <div class="f"><label class="l">Max distance from home</label>
+        <select data-k="Max distance"><option value="">Select</option><option>Within 2 hours</option><option>Within my state / region</option><option>Anywhere in the country</option></select></div>
+      <div class="f"><label class="l">Family attending home games matters?</label>
+        <select data-k="Family at games"><option value="">Select</option><option>A lot</option><option>Somewhat</option><option>Not really</option></select></div>
+    </div>
+    <div class="f"><label class="l">School size</label>
+      <div class="opts" data-k="School size" data-multi="1">
+        <span class="opt"><input type="checkbox" id="s1" value="Small"><label for="s1">Small</label></span>
+        <span class="opt"><input type="checkbox" id="s2" value="Mid"><label for="s2">Mid</label></span>
+        <span class="opt"><input type="checkbox" id="s3" value="Large"><label for="s3">Large</label></span>
+        <span class="opt"><input type="checkbox" id="s4" value="No preference"><label for="s4">No pref</label></span>
+      </div></div>
+    <div class="f"><label class="l">Setting</label>
+      <div class="opts" data-k="Setting" data-multi="1">
+        <span class="opt"><input type="checkbox" id="e1" value="Urban"><label for="e1">Urban</label></span>
+        <span class="opt"><input type="checkbox" id="e2" value="Suburban"><label for="e2">Suburban</label></span>
+        <span class="opt"><input type="checkbox" id="e3" value="Rural"><label for="e3">Rural</label></span>
+        <span class="opt"><input type="checkbox" id="e4" value="No preference"><label for="e4">No pref</label></span>
+      </div></div>
+    <div class="f"><label class="l">Other environment notes (public/private, religious, climate, etc.)</label><input type="text" data-k="Environment notes"></div>
+
+    <!-- 6 FOOTBALL FIT -->
+    <div class="bar"><span class="n">6</span>Football Fit &amp; Role<span class="who player">Player</span></div>
+    <div class="grid2">
+      <div class="f"><label class="l">Position you want to play in college</label><input type="text" data-k="College position" placeholder="Sometimes different from HS"></div>
+      <div class="f"><label class="l">Scholarship vs. preferred walk-on</label>
+        <select data-k="Scholarship vs PWO"><option value="">Select</option><option>Scholarship only</option><option>Open to preferred walk-on</option><option>Not sure</option></select></div>
+    </div>
+    <div class="f"><label class="l">Role and timeline you want</label>
+      <div class="opts" data-k="Desired role">
+        <span class="opt"><input type="radio" name="role" id="r1" value="Play early"><label for="r1">Play early</label></span>
+        <span class="opt"><input type="radio" name="role" id="r2" value="Develop behind older guys"><label for="r2">Develop, then earn it</label></span>
+        <span class="opt"><input type="radio" name="role" id="r3" value="Earn a walk-on spot"><label for="r3">Earn a spot</label></span>
+      </div></div>
+    <div class="f"><label class="l">Scheme preference for your position</label><input type="text" data-k="Scheme preference" placeholder="e.g. spread / RPO, pro-style, air raid, gap/zone run"></div>
+
+    <!-- 7 GOALS + DREAM -->
+    <div class="bar"><span class="n">7</span>Goals &amp; Aspiration<span class="who player">Player</span></div>
+    <div class="f"><label class="l">Why play college football?</label>
+      <div class="opts" data-k="Why play">
+        <span class="opt"><input type="radio" name="why" id="w1" value="NFL track"><label for="w1">NFL track</label></span>
+        <span class="opt"><input type="radio" name="why" id="w2" value="Degree + experience"><label for="w2">Degree + experience</label></span>
+        <span class="opt"><input type="radio" name="why" id="w3" value="Both"><label for="w3">Both</label></span>
+      </div></div>
+    <div class="f"><label class="l">Dealbreakers - schools or situations that are an automatic no</label><input type="text" data-k="Dealbreakers"></div>
+
+    <div class="dream">
+      <div class="dh">&#9733; Dream Bucket</div>
+      <p>The schools you'd love regardless of whether the numbers say so right now. We keep these separate so they don't skew the honest list. We'll fold one or two in as genuine reaches.</p>
+      <div class="grid3">
+        <div class="f" style="margin:0"><label class="l">Dream school 1</label><input type="text" data-k="Dream 1"></div>
+        <div class="f" style="margin:0"><label class="l">Dream school 2</label><input type="text" data-k="Dream 2"></div>
+        <div class="f" style="margin:0"><label class="l">Dream school 3</label><input type="text" data-k="Dream 3"></div>
+      </div>
+    </div>
+
+    <!-- CONSENT -->
+    <div class="bar"><span class="n">&#10003;</span>Consent &amp; Sign-Off<span class="who">Parent / Guardian</span></div>
+    <div class="consent">
+      <div class="ch">Authorization &amp; consent - parent / legal guardian</div>
+      <p style="font-size:12px;color:var(--mut);margin:0 0 12px">Read each item before checking it. A parent or legal guardian must complete this section because the player is a prospective student-athlete and may be a minor. All boxes are required before the form can be submitted.</p>
+      <label class="chk"><input type="checkbox" data-k="Consent: authority"><span>I am the player's <b>parent or legal guardian</b> and have the authority to provide this consent on the player's behalf. I <b>authorize Next Up Prospects (NUP)</b> to contact college football coaches on the player's behalf, for the sole purpose of initial recruiting outreach, using the information in this form and the dedicated email account described below.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: account"><span>I consent to NUP creating a <b>dedicated recruiting email account</b> for this outreach. The player and I are given access to that account, it is used only for coach outreach on the player's behalf, and I may revoke access at any time.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: review"><span>I understand the player <b>reviews and approves every initial email before it is sent</b>, and is copied on all outgoing messages, so we can see exactly what is sent in the player's name.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: list"><span>I understand NUP will give us a proposed list of schools, and that <b>no emails are sent to any coach until the player and I review and approve that list.</b></span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: scope"><span>I understand NUP handles <b>initial contact only</b>. Once a coach replies, the player carries the conversation directly using the toolkit. NUP does not negotiate, commit, or speak for the player beyond initial outreach.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: accuracy"><span>The information in this form is <b>accurate to the best of our knowledge</b>. I understand NUP relies on it to build the list and the outreach, and that overstating measurables or achievements can mislead coaches and damage the player's credibility.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: data"><span>I understand the player's information is used <b>only to provide this service</b>, is <b>not sold</b>, and is shared with college coaches only as part of outreach we have approved. I may <b>withdraw this consent and request deletion</b> of the player's information at any time by contacting NUP.</span></label>
+      <label class="chk"><input type="checkbox" data-k="Consent: noguarantee"><span>I understand NUP <b>does not guarantee</b> any offer, scholarship, roster spot, or coach response, and that recruiting outcomes depend on factors outside NUP's control. NUP is a preparation and outreach service, <b>not a sports agent</b>, and does not provide legal, financial, or NCAA-eligibility advice; we remain responsible for our own NCAA eligibility and amateurism compliance.</span></label>
+      <p style="font-size:12px;color:var(--mut);margin:12px 0 0">By entering the parent/guardian name and date below and submitting this form, I agree to the items above on behalf of the player.</p>
+      <div class="signrow">
+        <div class="f" style="margin:0"><label class="l">Parent / guardian name</label><input type="text" data-k="Parent name"></div>
+        <div class="f" style="margin:0"><label class="l">Date</label><input type="date" data-k="Consent date"></div>
+      </div>
+      <div class="signrow" style="margin-top:14px">
+        <div class="f" style="margin:0"><label class="l">Parent email</label><input type="email" data-k="Parent email"></div>
+        <div class="f" style="margin:0"><label class="l">Parent phone</label><input type="tel" data-k="Parent phone"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- honeypot: hidden from people, bots fill it; submissions with it set are dropped -->
+  <input type="text" id="hp_company" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+  <div class="act">
+    <button class="btn-go" id="submit">Submit Questionnaire</button>
+    <button class="btn-pr" id="gen">Preview Summary</button>
+    <button class="btn-pr" id="prn">Print / Save PDF</button>
+    <span class="meta" id="actmsg">Your answers go straight to the NUP recruiting team.</span>
+  </div>
+
+  <div id="done" style="display:none;margin:0 34px 30px;background:var(--ac);color:var(--ink);padding:18px 22px;font-weight:700;font-family:'Saira Condensed',Arial,sans-serif;letter-spacing:.5px">
+    Submitted. The NUP recruiting team has your questionnaire and will be in touch about your school list.
+  </div>
+  <div id="err" style="display:none;margin:0 34px 14px;background:#3a0d0d;color:#ffd5d5;padding:14px 20px;font-size:13px">
+    Something went wrong sending this. Your answers aren't lost - use Preview Summary below, copy it, and send it to your NUP contact directly.
+  </div>
+
+  <div id="out">
+    <h3>Intake Summary</h3>
+    <textarea id="outtext" readonly></textarea>
+    <div style="margin-top:10px"><button class="btn-pr" id="cpy">Copy to clipboard</button></div>
+  </div>
+
+  <div class="foot"><span>NEXT UP <b>PROSPECTS</b></span><span>Recruiting Fit Questionnaire &#183; Football</span></div>
+</div>
+
+<script>
+// Where the form posts. Hosting this page and the function on the same site
+// (e.g. Vercel) means this relative path works with no CORS setup.
+var ENDPOINT = "/api/submit";
+
+// --- readers ---
+function field(dk){return document.querySelector('input[data-k="'+dk+'"], select[data-k="'+dk+'"], textarea[data-k="'+dk+'"]');}
+function text(dk){var el=field(dk);return el?(el.value||'').trim():'';}
+function checkBool(dk){var el=field(dk);return !!(el&&el.checked);}
+function radioVal(dk){var sel=document.querySelector('[data-k="'+dk+'"] input:checked');return sel?sel.value:'';}
+function multiArr(dk){var a=[];document.querySelectorAll('[data-k="'+dk+'"][data-multi] input:checked').forEach(function(i){a.push(i.value)});return a;}
+function vflag(name){var s=document.querySelector('input[name="'+name+'"]:checked');return s?s.value:'';}
+
+// human-readable values for the summary fallback
+function val(k){
+  var grp=document.querySelector('[data-k="'+k+'"][data-multi]');
+  if(grp){return multiArr(k).join(', ');}
+  var rc=document.querySelector('[data-k="'+k+'"] input[type=radio]');
+  if(rc){return radioVal(k);}
+  var el=field(k);
+  if(!el)return '';
+  if(el.type==='checkbox')return el.checked?'YES':'no';
+  return el.value||'';
+}
+
+// --- build the Airtable-named, typed payload ---
+function buildFields(){
+  var f={};
+  function T(name,dk){var v=text(dk);if(v)f[name]=v;}
+  function R(name,dk){var v=radioVal(dk);if(v)f[name]=v;}
+  function M(name,dk){var a=multiArr(dk);if(a.length)f[name]=a;}
+  function V(name,nm){var v=vflag(nm);if(v)f[name]=v;}
+  function C(name,dk){f[name]=checkBool(dk);}
+
+  T('Player Name','Player name');
+  T('Class Year','Class year');
+  T('Primary Position','Primary position');
+  T('Secondary Position','Secondary position');
+  T('Eligibility Center Status','Eligibility Center status');
+  T('Transcript On File','Transcript on file');
+  T('Height','Height');
+  var w=field('Weight'); if(w&&w.value!=='')f['Weight (lbs)']=Number(w.value);
+  T('Measured Date','Measured date');
+  T('40 Time','40 time'); V('40 Verification','v40');
+  T('Shuttle','Shuttle'); V('Shuttle Verification','vsh');
+  T('Vertical','Vertical'); V('Vertical Verification','vvj');
+  T('Key Lift','Key lift'); V('Lift Verification','vlf');
+  T('Competition Level','Competition level');
+  T('Team Role','Role');
+  T('Honors','Honors');
+  T('Film Link','Film link');
+  T('Offers','Offers');
+  T('Coach Contact & Camps','Contact and camps');
+  T('GPA','GPA'); T('SAT','SAT'); T('ACT','ACT');
+  T('Intended Major','Intended major');
+  T('Out-of-Pocket Budget','Out-of-pocket budget');
+  T('Need-Based Aid','Need-based aid');
+  M('Money Priority','Money priority');
+  R('Money vs Level Tradeoff','Money vs level tradeoff');
+  T('Max Distance','Max distance');
+  T('Home City','Home city');
+  T('Home State','Home state');
+  T('Family At Games','Family at games');
+  M('School Size','School size');
+  M('Setting','Setting');
+  T('Environment Notes','Environment notes');
+  T('College Position','College position');
+  T('Scholarship vs Walk-On','Scholarship vs PWO');
+  R('Desired Role','Desired role');
+  T('Scheme Preference','Scheme preference');
+  R('Why Play','Why play');
+  T('Dealbreakers','Dealbreakers');
+  T('Dream School 1','Dream 1'); T('Dream School 2','Dream 2'); T('Dream School 3','Dream 3');
+  C('Consent: Account Access','Consent: account');
+  C('Consent: Player Reviews Sends','Consent: review');
+  C('Consent: List Sign-Off','Consent: list');
+  C('Consent: Scope Understood','Consent: scope');
+  C('Consent: Parent/Guardian Authority','Consent: authority');
+  C('Consent: Info Accurate','Consent: accuracy');
+  C('Consent: Data Use & Withdrawal','Consent: data');
+  C('Consent: No Guarantee / Not Agent','Consent: noguarantee');
+  T('Parent/Guardian Name','Parent name');
+  T('Consent Date','Consent date');
+  T('Parent Email','Parent email');
+  T('Parent Phone','Parent phone');
+  return f;
+}
+
+// --- summary fallback ---
+function buildSummary(){
+  var L=[];
+  function line(label,v){L.push(label.padEnd(28,' ')+': '+(v||'-'));}
+  L.push('NEXT UP PROSPECTS - INTAKE SUMMARY');
+  L.push('Verify measurables before banding.');L.push('');
+  L.push('- ELIGIBILITY -');
+  ['Player name','Class year','Primary position','Secondary position','Eligibility Center status','Transcript on file'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- ATHLETIC (verification flags matter) -');
+  line('Height',val('Height'));line('Weight',val('Weight'));line('Measured date',val('Measured date'));
+  line('40 time',val('40 time')+'  ['+(vflag('v40')||'not marked')+']');
+  line('Shuttle',val('Shuttle')+'  ['+(vflag('vsh')||'not marked')+']');
+  line('Vertical',val('Vertical')+'  ['+(vflag('vvj')||'not marked')+']');
+  line('Key lift',val('Key lift')+'  ['+(vflag('vlf')||'not marked')+']');
+  ['Competition level','Role','Honors','Film link','Offers','Contact and camps'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- ACADEMICS -');
+  ['GPA','SAT','ACT','Intended major'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- FINANCIAL -');
+  ['Out-of-pocket budget','Need-based aid','Money priority','Money vs level tradeoff'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- FIT PREFERENCES -');
+  ['Max distance','Family at games','School size','Setting','Environment notes'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- FOOTBALL FIT -');
+  ['College position','Scholarship vs PWO','Desired role','Scheme preference'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- GOALS / DREAM (kept separate) -');
+  ['Why play','Dealbreakers','Dream 1','Dream 2','Dream 3'].forEach(function(k){line(k,val(k))});
+  L.push('');L.push('- CONSENT -');
+  ['Consent: authority','Consent: account','Consent: review','Consent: list','Consent: scope','Consent: accuracy','Consent: data','Consent: noguarantee','Parent name','Consent date','Parent email','Parent phone'].forEach(function(k){line(k,val(k))});
+  return L.join('\n');
+}
+function showSummary(){document.getElementById('outtext').value=buildSummary();document.getElementById('out').classList.add('show');}
+
+document.getElementById('gen').onclick=function(){showSummary();document.getElementById('out').scrollIntoView({behavior:'smooth'});};
+document.getElementById('prn').onclick=function(){window.print()};
+document.getElementById('cpy').onclick=function(){var t=document.getElementById('outtext');t.select();document.execCommand('copy');this.textContent='Copied';var b=this;setTimeout(function(){b.textContent='Copy to clipboard'},1500)};
+
+document.getElementById('submit').onclick=function(){
+  var msg=document.getElementById('actmsg');
+  var err=document.getElementById('err');
+  err.style.display='none';
+  // required: player name + all consent boxes
+  if(!text('Player name')){msg.textContent='Add the player name before submitting.';return;}
+  if(!(checkBool('Consent: authority')&&checkBool('Consent: account')&&checkBool('Consent: review')&&checkBool('Consent: list')&&checkBool('Consent: scope')&&checkBool('Consent: accuracy')&&checkBool('Consent: data')&&checkBool('Consent: noguarantee'))){
+    msg.textContent='A parent/guardian needs to check all consent boxes before submitting.';
+    document.querySelector('.consent').scrollIntoView({behavior:'smooth'});return;
+  }
+  var hp=document.getElementById('hp_company');
+  var payload={fields:buildFields(), company:hp?hp.value:''};
+  var btn=this; btn.disabled=true; btn.textContent='Submitting...';
+  fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){if(!r.ok)throw new Error('bad status');return r.json();})
+    .then(function(){
+      document.querySelector('.act').style.display='none';
+      document.getElementById('done').style.display='block';
+      document.getElementById('done').scrollIntoView({behavior:'smooth'});
+    })
+    .catch(function(){
+      btn.disabled=false; btn.textContent='Submit Questionnaire';
+      err.style.display='block'; showSummary();
+      err.scrollIntoView({behavior:'smooth'});
+    });
+};
+</script>
+</body>
+</html>
